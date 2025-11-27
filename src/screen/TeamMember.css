@@ -1,97 +1,25 @@
-.tm-container {
-  background: white;
-  padding: 30px;
-  border-radius: 16px;
-  max-width: 650px;
-  margin: 20px auto;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-}
-
-.tm-status-box {
-  margin-bottom: 25px;
-}
-
-.tm-status-buttons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.tm-status-btn {
-  padding: 10px 18px;
-  border-radius: 8px;
-  background: #e3e6ea;
-  border: none;
-  cursor: pointer;
-  font-size: 15px;
-  transition: 0.3s;
-}
-
-.tm-active {
-  background: #5778ff;
-  color: white;
-}
-
-.tm-tasks-box {
-  margin-top: 20px;
-}
-
-.tm-card {
-  background: #f9fafc;
-  padding: 16px;
-  border-radius: 12px;
-  margin-bottom: 16px;
-  border-left: 6px solid #5778ff;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-}
-
-.tm-done {
-  border-left-color: #22bb33;
-  background: #eefcf0;
-}
-
-.tm-header {
-  display: flex;
-  justify-content: space-between;
+.tm-task-state {
   margin-bottom: 10px;
 }
 
-.tm-progress-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.tm-progress-bar {
-  height: 10px;
-  width: 100%;
-  background: #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.tm-progress-fill {
-  height: 100%;
-  background: #5778ff;
-  border-radius: 10px;
-}
-
-.tm-controls {
-  margin-top: 10px;
-  display: flex;
-  gap: 10px;
-}
-
-.tm-controls button {
+.tm-state-badge {
   padding: 6px 12px;
-  background: #5778ff;
-  color: white;
-  border: none;
   border-radius: 8px;
-  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
 }
 
-.tm-controls button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
+.tm-notstarted {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.tm-inprogress {
+  background: #ffe08a;
+  color: #8a6d00;
+}
+
+.tm-completed {
+  background: #b2f2bb;
+  color: #0f7c1a;
 }

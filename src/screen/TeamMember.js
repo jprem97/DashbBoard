@@ -1,12 +1,32 @@
 import React from "react";
 import "./TeamMember.css";
 
-function TeamMemberView({ globalStatus, setGlobalStatus, tasks, setTasks }) {
+function TeamMemberView({
+  memberId,
+  globalStatus,
+  setGlobalStatus,
+  tasks,
+  setTasks,
+  status,
+  setStatus
+}) {
   const statuses = ["Working", "Break", "Meeting", "Offline"];
+
+  const changeStatus = (newStatus) => {
+    setGlobalStatus(newStatus);
+
+    setStatus(
+      status.map((item) =>
+        item.id === memberId
+          ? { ...item, status: newStatus.toLowerCase() }
+          : item
+      )
+    );
+  };
 
   const updateTaskProgress = (taskId, delta) => {
     setTasks(
-      tasks.map(t =>
+      tasks.map((t) =>
         t.id === taskId
           ? {
               ...t,
@@ -18,6 +38,12 @@ function TeamMemberView({ globalStatus, setGlobalStatus, tasks, setTasks }) {
     );
   };
 
+  const getTaskState = (p) => {
+    if (p === 0) return "Not Started";
+    if (p === 100) return "Completed";
+    return "In Progress";
+  };
+
   return (
     <div className="tm-container">
       <h2>Team Member View</h2>
@@ -25,13 +51,13 @@ function TeamMemberView({ globalStatus, setGlobalStatus, tasks, setTasks }) {
       <div className="tm-status-box">
         <h3>Update Your Status</h3>
         <div className="tm-status-buttons">
-          {statuses.map(s => (
+          {statuses.map((s) => (
             <button
               key={s}
               className={`tm-status-btn ${
                 globalStatus === s ? "tm-active" : ""
               }`}
-              onClick={() => setGlobalStatus(s)}
+              onClick={() => changeStatus(s)}
             >
               {s}
             </button>
@@ -42,11 +68,17 @@ function TeamMemberView({ globalStatus, setGlobalStatus, tasks, setTasks }) {
       <div className="tm-tasks-box">
         <h3>Your Tasks</h3>
 
-        {tasks.map(t => (
+        {tasks.map((t) => (
           <div key={t.id} className={`tm-card ${t.completed ? "tm-done" : ""}`}>
             <div className="tm-header">
               <h4>{t.title}</h4>
               <span>{t.dueDate}</span>
+            </div>
+
+            <div className="tm-task-state">
+              <span className={`tm-state-badge tm-${getTaskState(t.progress).replace(" ", "").toLowerCase()}`}>
+                {getTaskState(t.progress)}
+              </span>
             </div>
 
             <div className="tm-progress-container">
