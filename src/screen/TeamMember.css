@@ -1,80 +1,85 @@
 .tm-container {
-  background: #fff;
-  padding: 28px;
-  border-radius: 16px;
+  background: white;
+  padding: 34px;
+  border-radius: 20px;
   margin: 20px auto;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  box-shadow: 0px 12px 35px rgba(0,0,0,0.08);
 }
 
-/* STATUS */
+.tm-status-box {
+  margin-bottom: 26px;
+}
+
 .tm-status-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
 }
 
 .tm-status-btn {
-  padding: 12px 20px;
+  padding: 14px 24px;
+  border-radius: 24px;
+  background: #e6e9f3;
   border: none;
-  border-radius: 20px;
-  background: #e8ebf1;
+  font-size: 15px;
+  transition: 0.25s;
+}
+
+.tm-status-btn:hover {
+  transform: scale(1.04);
 }
 
 .tm-active {
-  background: #5778ff;
+  background: #516dff;
   color: white;
 }
 
-/* CARD */
 .tm-card {
-  background: #f6f8fc;
-  padding: 20px;
-  border-radius: 14px;
-  margin-bottom: 22px;
-  border-left: 6px solid #5778ff;
+  background: #f6f8ff;
+  padding: 22px;
+  border-radius: 18px;
+  margin-bottom: 26px;
+  border-left: 7px solid #546dff;
+  box-shadow: 0px 6px 18px rgba(0,0,0,0.06);
 }
 
 .tm-done {
-  border-left-color: #22bb33;
+  border-left-color: #23c746;
+  background: #ebfff0;
 }
 
 .tm-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
-/* TASK METER */
 .tm-task-meter {
-  margin: 12px 0 16px 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+  margin: 16px 0;
 }
 
 .tm-task-meter-top {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  font-size: 15px;
 }
 
 .tm-state {
-  font-size: 14px;
   font-weight: 600;
-  color: #444;
 }
 
 .tm-percent {
-  font-size: 14px;
   font-weight: 700;
 }
 
-/* Proper bar */
 .tm-meter-bar {
   width: 100%;
-  height: 14px;
-  background: #dfe4ea;
+  height: 16px;
   border-radius: 10px;
+  background: #dfe4f5;
   overflow: hidden;
 }
 
@@ -84,21 +89,27 @@
   border-radius: 10px;
 }
 
-/* CONTROLS */
 .tm-controls {
-  margin-top: 16px;
+  margin-top: 18px;
   display: flex;
-  gap: 12px;
+  gap: 16px;
 }
 
 .tm-controls button {
-  padding: 8px 16px;
-  background: #5778ff;
+  padding: 10px 20px;
+  background: #516dff;
   color: white;
+  border-radius: 12px;
   border: none;
-  border-radius: 10px;
+  font-size: 15px;
+  transition: 0.25s;
+}
+
+.tm-controls button:hover {
+  transform: translateY(-3px);
 }
 
 .tm-controls button:disabled {
-  background: #ccc;
+  background: #bbbbbb;
+  transform: none;
 }
