@@ -1,25 +1,110 @@
-.tm-task-state {
-  margin-bottom: 10px;
+.tm-container {
+  background: white;
+  padding: 35px;
+  border-radius: 20px;
+  max-width: 700px;
+  margin: 25px auto;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
 }
 
-.tm-state-badge {
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 13px;
+.tm-status-box {
+  margin-bottom: 30px;
+}
+
+.tm-status-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.tm-status-btn {
+  padding: 12px 24px;
+  border-radius: 22px;
+  background: #e3e6ea;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.tm-active {
+  background: #5778ff;
+  color: white;
+}
+
+.tm-tasks-box {
+  margin-top: 25px;
+}
+
+.tm-card {
+  background: #f9fafc;
+  padding: 22px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  border-left: 6px solid #5778ff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.tm-done {
+  border-left-color: #22bb33;
+  background: #eefcf0;
+}
+
+.tm-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.tm-task-meter {
+  margin: 18px 0;
+}
+
+.tm-meter-text {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.tm-meter-bar {
+  width: 100%;
+  height: 14px;
+  background: #e2e2e2;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.tm-meter-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.35s ease;
+}
+
+.tm-meter-percent {
+  font-size: 14px;
   font-weight: 600;
 }
 
-.tm-notstarted {
-  background: #e0e0e0;
-  color: #333;
+.tm-controls {
+  margin-top: 16px;
+  display: flex;
+  gap: 14px;
 }
 
-.tm-inprogress {
-  background: #ffe08a;
-  color: #8a6d00;
+.tm-controls button {
+  padding: 8px 16px;
+  background: #5778ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
 }
 
-.tm-completed {
-  background: #b2f2bb;
-  color: #0f7c1a;
+.tm-controls button:disabled {
+  background: #c4c4c4;
+  cursor: not-allowed;
 }

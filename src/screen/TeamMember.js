@@ -14,12 +14,9 @@ function TeamMemberView({
 
   const changeStatus = (newStatus) => {
     setGlobalStatus(newStatus);
-
     setStatus(
       status.map((item) =>
-        item.id === memberId
-          ? { ...item, status: newStatus.toLowerCase() }
-          : item
+        item.id === memberId ? { ...item, status: newStatus.toLowerCase() } : item
       )
     );
   };
@@ -44,6 +41,12 @@ function TeamMemberView({
     return "In Progress";
   };
 
+  const getTaskColor = (p) => {
+    if (p === 0) return "#b0b0b0";
+    if (p === 100) return "#22bb33";
+    return "#f8c10f";
+  };
+
   return (
     <div className="tm-container">
       <h2>Team Member View</h2>
@@ -54,9 +57,7 @@ function TeamMemberView({
           {statuses.map((s) => (
             <button
               key={s}
-              className={`tm-status-btn ${
-                globalStatus === s ? "tm-active" : ""
-              }`}
+              className={`tm-status-btn ${globalStatus === s ? "tm-active" : ""}`}
               onClick={() => changeStatus(s)}
             >
               {s}
@@ -75,20 +76,20 @@ function TeamMemberView({
               <span>{t.dueDate}</span>
             </div>
 
-            <div className="tm-task-state">
-              <span className={`tm-state-badge tm-${getTaskState(t.progress).replace(" ", "").toLowerCase()}`}>
-                {getTaskState(t.progress)}
-              </span>
-            </div>
+            <div className="tm-task-meter">
+              <span className="tm-meter-text">{getTaskState(t.progress)}</span>
 
-            <div className="tm-progress-container">
-              <div className="tm-progress-bar">
+              <div className="tm-meter-bar">
                 <div
-                  className="tm-progress-fill"
-                  style={{ width: `${t.progress}%` }}
+                  className="tm-meter-fill"
+                  style={{
+                    width: `${t.progress}%`,
+                    backgroundColor: getTaskColor(t.progress)
+                  }}
                 ></div>
               </div>
-              <span>{t.progress}%</span>
+
+              <span className="tm-meter-percent">{t.progress}%</span>
             </div>
 
             <div className="tm-controls">

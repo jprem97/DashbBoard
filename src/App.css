@@ -11,76 +11,86 @@ body {
 }
 
 .app-container {
-  max-width: 650px;
+  max-width: 700px;
   margin: auto;
   background: white;
   padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
-h2 {
-  margin-bottom: 16px;
-  font-size: 24px;
-  font-weight: 600;
-  color: #333;
-  text-align: center;
+.mode-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
 }
 
-input[type="number"],
-input[type="text"] {
+.mode-buttons button {
+  flex: 1;
+  padding: 12px;
+  background: #5778ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.mode-buttons button:hover {
+  background: #3d5dff;
+}
+
+.input-box {
   width: 100%;
   padding: 12px;
-  margin: 6px 0;
+  margin: 12px 0;
   border: 2px solid #e3e6ea;
   border-radius: 10px;
   font-size: 15px;
   transition: 0.3s;
 }
 
-input:focus {
+.input-box:focus {
   border-color: #5778ff;
-  outline: none;
-  box-shadow: 0 0 6px rgba(87, 120, 255, 0.3);
+  box-shadow: 0 0 6px rgba(87,120,255,0.3);
 }
 
-button {
+.primary-btn {
   width: 100%;
   padding: 12px;
-  margin-top: 10px;
   background: #5778ff;
   color: white;
   border: none;
-  font-size: 19px;
   border-radius: 10px;
+  font-size: 15px;
+  margin-top: 10px;
   cursor: pointer;
-  font-weight: 500;
   transition: 0.3s;
 }
 
-button:hover {
+.primary-btn:hover {
   background: #3d5dff;
 }
 
-button:active {
-  transform: scale(0.97);
-}
-
-.status-list {
-  margin-bottom: 20px;
-}
-
-.status-item {
-  padding: 14px;
-  background: #f9fafc;
-  border-left: 6px solid #5778ff;
+.reset-btn {
+  width: 100%;
+  padding: 12px;
+  background: #ff4e4e;
+  color: white;
+  border: none;
   border-radius: 10px;
-  margin-bottom: 12px;
-  display: flex;
-  justify-content: space-between;
   font-size: 15px;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: 0.25s;
 }
 
-.status-item span {
-  font-weight: 600;
+.reset-btn:hover {
+  background: #e03b3b;
+}
+
+.lead-section,
+.member-section {
+  margin-top: 10px;
 }
