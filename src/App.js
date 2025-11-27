@@ -4,7 +4,8 @@ import TeamMemberView from "./screen/TeamMember";
 import "./App.css";
 
 function App() {
-  const [mode, setMode] = useState("lead");
+  const [screen, setScreen] = useState("home");
+
   const [id, setId] = useState("");
   const [memberId, setMemberId] = useState("");
   const [task, setTask] = useState("");
@@ -36,17 +37,17 @@ function App() {
     );
   };
 
-  const resetMember = () => {
-    setMemberId("");
-    setGlobalStatus("Working");
-    setTasks(defaultTasks);
-  };
-
   const resetLead = () => {
     setId("");
     setTask("");
     setShowNotWorking(false);
     setStatus(defaultStatus);
+  };
+
+  const resetMember = () => {
+    setMemberId("");
+    setGlobalStatus("Working");
+    setTasks(defaultTasks);
   };
 
   const visibleStatus = showNotWorking
@@ -56,13 +57,38 @@ function App() {
   return (
     <div className="app-container">
 
-      <div className="mode-buttons">
-        <button onClick={() => setMode("lead")}>Team Lead View</button>
-        <button onClick={() => setMode("member")}>Team Member View</button>
-      </div>
+     
+      {screen === "home" && (
+        <div className="home-page">
+          <h1>Select User Type</h1>
 
-      {mode === "member" ? (
+          <button
+            className="primary-btn"
+            onClick={() => setScreen("lead")}
+          >
+            Team Lead
+          </button>
+
+          <button
+            className="primary-btn"
+            onClick={() => setScreen("member")}
+          >
+            Team Member
+          </button>
+        </div>
+      )}
+
+      {/* TEAM MEMBER PAGE */}
+      {screen === "member" && (
         <div className="member-section">
+
+          <button
+            className="back-btn"
+            onClick={() => setScreen("home")}
+          >
+            ⬅ Back
+          </button>
+
           {!memberId && (
             <input
               type="number"
@@ -91,8 +117,19 @@ function App() {
             </>
           )}
         </div>
-      ) : (
+      )}
+
+      
+      {screen === "lead" && (
         <div className="lead-section">
+
+          <button
+            className="back-btn"
+            onClick={() => setScreen("home")}
+          >
+            ⬅ Back
+          </button>
+
           <List status={visibleStatus} />
 
           <input
@@ -123,10 +160,11 @@ function App() {
           </button>
 
           <button onClick={resetLead} className="reset-btn">
-            Reset Team Lead View
+            Reset Lead View
           </button>
         </div>
       )}
+
     </div>
   );
 }
