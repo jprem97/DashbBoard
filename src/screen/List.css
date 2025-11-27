@@ -1,0 +1,29 @@
+.list-container {
+  margin: 20px 0;
+}
+
+.list-card {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  border-left: 6px solid #5778ff;
+  transition: 0.2s;
+}
+
+.list-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0,0,0,0.12);
+}
+
+.list-row {
+  font-size: 15px;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.list-row span {
+  font-weight: 600;
+  margin-right: 6px;
+}

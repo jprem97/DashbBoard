@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import List from "./screen/About";
-
+import List from "./screen/List";
+import "./App.css";
 function App() {
   const [id, setId] = useState("");
   const [task, setTask] = useState("");
