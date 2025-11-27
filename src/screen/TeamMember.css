@@ -1,31 +1,26 @@
 .tm-container {
-  background: white;
-  padding: 35px;
-  border-radius: 20px;
-  max-width: 700px;
-  margin: 25px auto;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  background: #fff;
+  padding: 28px;
+  border-radius: 16px;
+  margin: 20px auto;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
 }
 
 .tm-status-box {
-  margin-bottom: 30px;
+  margin-bottom: 22px;
 }
 
 .tm-status-buttons {
   display: flex;
-  gap: 14px;
   flex-wrap: wrap;
-  margin-top: 12px;
+  gap: 12px;
 }
 
 .tm-status-btn {
-  padding: 12px 24px;
-  border-radius: 22px;
-  background: #e3e6ea;
+  padding: 12px 22px;
   border: none;
-  cursor: pointer;
-  font-size: 15px;
-  transition: 0.3s;
+  border-radius: 20px;
+  background: #e8ebf1;
 }
 
 .tm-active {
@@ -33,65 +28,59 @@
   color: white;
 }
 
-.tm-tasks-box {
-  margin-top: 25px;
-}
-
 .tm-card {
-  background: #f9fafc;
-  padding: 22px;
+  background: #f6f8fc;
+  padding: 20px;
   border-radius: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   border-left: 6px solid #5778ff;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
 }
 
 .tm-done {
   border-left-color: #22bb33;
-  background: #eefcf0;
 }
 
 .tm-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .tm-task-meter {
-  margin: 18px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 14px 0;
 }
 
 .tm-meter-text {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
-  margin-bottom: 8px;
-  display: inline-block;
 }
 
 .tm-meter-bar {
   width: 100%;
   height: 14px;
-  background: #e2e2e2;
+  background: #dfe4ea;
   border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 8px;
 }
 
 .tm-meter-fill {
   height: 100%;
   border-radius: 10px;
-  transition: width 0.35s ease;
+  transition: width 0.25s ease-in-out;
 }
 
 .tm-meter-percent {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .tm-controls {
-  margin-top: 16px;
+  margin-top: 14px;
   display: flex;
-  gap: 14px;
+  gap: 12px;
 }
 
 .tm-controls button {
@@ -99,12 +88,9 @@
   background: #5778ff;
   color: white;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 15px;
+  border-radius: 10px;
 }
 
 .tm-controls button:disabled {
-  background: #c4c4c4;
-  cursor: not-allowed;
+  background: #ccc;
 }

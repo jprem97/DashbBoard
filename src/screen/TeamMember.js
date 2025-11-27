@@ -1,7 +1,7 @@
 import React from "react";
 import "./TeamMember.css";
 
-function TeamMemberView({
+function TeamMember({
   memberId,
   globalStatus,
   setGlobalStatus,
@@ -86,23 +86,17 @@ function TeamMemberView({
                     width: `${t.progress}%`,
                     backgroundColor: getTaskColor(t.progress)
                   }}
-                ></div>
+                />
               </div>
 
               <span className="tm-meter-percent">{t.progress}%</span>
             </div>
 
             <div className="tm-controls">
-              <button
-                onClick={() => updateTaskProgress(t.id, -10)}
-                disabled={t.progress === 0}
-              >
+              <button onClick={() => updateTaskProgress(t.id, -10)} disabled={t.progress === 0}>
                 -
               </button>
-              <button
-                onClick={() => updateTaskProgress(t.id, 10)}
-                disabled={t.progress === 100}
-              >
+              <button onClick={() => updateTaskProgress(t.id, 10)} disabled={t.progress === 100}>
                 +
               </button>
             </div>
@@ -113,4 +107,4 @@ function TeamMemberView({
   );
 }
 
-export default TeamMemberView;
+export default TeamMember;

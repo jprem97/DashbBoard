@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import List from "./screen/List";
-import TeamMemberView from "./screen/TeamMember";
+import TeamMember from "./screen/TeamMember";
 import "./App.css";
 
 function App() {
   const [screen, setScreen] = useState("home");
-
   const [id, setId] = useState("");
   const [memberId, setMemberId] = useState("");
   const [task, setTask] = useState("");
-  const [showNotWorking, setShowNotWorking] = useState(false);
+  const [showBreak, setShowBreak] = useState(false);
 
   const defaultStatus = [
     { id: 1, status: "working", task: "some work" },
-    { id: 3, status: "not working", task: "some work" },
+    { id: 3, status: "break", task: "some work" },
     { id: 5, status: "working", task: "some work" },
     { id: 2, status: "working", task: "some work" },
-    { id: 4, status: "not working", task: "some work" }
+    { id: 4, status: "break", task: "some work" }
   ];
 
   const defaultTasks = [
@@ -40,7 +39,7 @@ function App() {
   const resetLead = () => {
     setId("");
     setTask("");
-    setShowNotWorking(false);
+    setShowBreak(false);
     setStatus(defaultStatus);
   };
 
@@ -50,42 +49,27 @@ function App() {
     setTasks(defaultTasks);
   };
 
-  const visibleStatus = showNotWorking
-    ? status.filter(item => item.status === "not working")
+  const visibleStatus = showBreak
+    ? status.filter(item => item.status === "break")
     : status;
 
   return (
     <div className="app-container">
-
-     
       {screen === "home" && (
         <div className="home-page">
           <h1>Select User Type</h1>
-
-          <button
-            className="primary-btn"
-            onClick={() => setScreen("lead")}
-          >
+          <button className="primary-btn" onClick={() => setScreen("lead")}>
             Team Lead
           </button>
-
-          <button
-            className="primary-btn"
-            onClick={() => setScreen("member")}
-          >
+          <button className="primary-btn" onClick={() => setScreen("member")}>
             Team Member
           </button>
         </div>
       )}
 
-      {/* TEAM MEMBER PAGE */}
       {screen === "member" && (
         <div className="member-section">
-
-          <button
-            className="back-btn"
-            onClick={() => setScreen("home")}
-          >
+          <button className="back-btn" onClick={() => setScreen("home")}>
             ⬅ Back
           </button>
 
@@ -105,11 +89,11 @@ function App() {
                 Reset Member View
               </button>
 
-              <TeamMemberView
+              <TeamMember
                 memberId={Number(memberId)}
                 globalStatus={globalStatus}
                 setGlobalStatus={setGlobalStatus}
-                tasks={tasks.filter(t => t.id === Number(memberId))}
+                tasks={tasks}
                 setTasks={setTasks}
                 status={status}
                 setStatus={setStatus}
@@ -119,14 +103,9 @@ function App() {
         </div>
       )}
 
-      
       {screen === "lead" && (
         <div className="lead-section">
-
-          <button
-            className="back-btn"
-            onClick={() => setScreen("home")}
-          >
+          <button className="back-btn" onClick={() => setScreen("home")}>
             ⬅ Back
           </button>
 
@@ -153,10 +132,10 @@ function App() {
           </button>
 
           <button
-            onClick={() => setShowNotWorking(s => !s)}
+            onClick={() => setShowBreak(s => !s)}
             className="primary-btn"
           >
-            {showNotWorking ? "Show All" : "Show Not Working"}
+            {showBreak ? "Show All" : "Show Break"}
           </button>
 
           <button onClick={resetLead} className="reset-btn">
@@ -164,7 +143,6 @@ function App() {
           </button>
         </div>
       )}
-
     </div>
   );
 }
