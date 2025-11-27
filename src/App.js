@@ -1,77 +1,57 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import List from "./screen/List";
 import TeamMember from "./screen/TeamMember";
+import { updateMemberTask, resetMembers } from "./features/statusSlice";
+import { resetTasks } from "./features/tasksSlice";
 import "./App.css";
 
-function App() {
+export default function App() {
   const [screen, setScreen] = useState("home");
   const [id, setId] = useState("");
   const [memberId, setMemberId] = useState("");
   const [task, setTask] = useState("");
   const [showBreak, setShowBreak] = useState(false);
 
-  const defaultStatus = [
-    { id: 1, status: "working", task: "some work" },
-    { id: 3, status: "break", task: "some work" },
-    { id: 5, status: "working", task: "some work" },
-    { id: 2, status: "working", task: "some work" },
-    { id: 4, status: "break", task: "some work" }
-  ];
-
-  const defaultTasks = [
-    { id: 1, title: "Task A", dueDate: "2025-01-01", progress: 20, completed: false },
-    { id: 2, title: "Task B", dueDate: "2025-01-02", progress: 50, completed: false },
-    { id: 3, title: "Task C", dueDate: "2025-01-05", progress: 0, completed: false }
-  ];
-
-  const [status, setStatus] = useState(defaultStatus);
-  const [globalStatus, setGlobalStatus] = useState("Working");
-  const [tasks, setTasks] = useState(defaultTasks);
+  const status = useSelector(state => state.members);
+  const tasks = useSelector(state => state.tasks);
+  const dispatch = useDispatch();
 
   const updateTask = () => {
-    setStatus(prev =>
-      prev.map(item =>
-        item.id === Number(id) ? { ...item, task: task } : item
-      )
-    );
+    dispatch(updateMemberTask({ id: Number(id), task }));
+    setId("");
+    setTask("");
   };
 
   const resetLead = () => {
     setId("");
     setTask("");
     setShowBreak(false);
-    setStatus(defaultStatus);
+    dispatch(resetMembers());
+    dispatch(resetTasks());
   };
 
   const resetMember = () => {
     setMemberId("");
-    setGlobalStatus("Working");
-    setTasks(defaultTasks);
   };
 
-  const visibleStatus = showBreak
-    ? status.filter(item => item.status === "break")
-    : status;
+  const visibleStatus = showBreak ? status.filter(item => item.status === "break") : status;
 
   return (
     <div className="app-container">
       {screen === "home" && (
-        <div className="home-page">
-          <h1>Select User Type</h1>
-          <button className="primary-btn" onClick={() => setScreen("lead")}>
-            Team Lead
-          </button>
-          <button className="primary-btn" onClick={() => setScreen("member")}>
-            Team Member
-          </button>
+        <div className="home-nav">
+          <h1 className="nav-title">Team Management Portal</h1>
+          <div className="nav-buttons">
+            <button className="nav-btn" onClick={() => setScreen("lead")}>Team Lead</button>
+            <button className="nav-btn" onClick={() => setScreen("member")}>Team Member</button>
+          </div>
         </div>
       )}
 
       {screen === "member" && (
         <div className="member-section">
-          <button className="back-btn" onClick={() => setScreen("home")}>
-            ⬅ Back
-          </button>
+          <button className="back-btn" onClick={() => setScreen("home")}>⬅ Back</button>
 
           {!memberId && (
             <input
@@ -85,18 +65,15 @@ function App() {
 
           {memberId && (
             <>
-              <button onClick={resetMember} className="reset-btn">
-                Reset Member View
-              </button>
-
+              <button onClick={resetMember} className="reset-btn">Reset Member View</button>
               <TeamMember
                 memberId={Number(memberId)}
-                globalStatus={globalStatus}
-                setGlobalStatus={setGlobalStatus}
-                tasks={tasks}
-                setTasks={setTasks}
+                globalStatus={status.find(m => m.id === Number(memberId))?.status || "Working"}
+                setGlobalStatus={(s) => dispatch(setMemberStatusLocal(s, Number(memberId)))}
+                tasks={tasks.filter(t => t.userId === Number(memberId))}
+                setTasks={() => {}}
                 status={status}
-                setStatus={setStatus}
+                setStatus={() => {}}
               />
             </>
           )}
@@ -105,9 +82,12 @@ function App() {
 
       {screen === "lead" && (
         <div className="lead-section">
-          <button className="back-btn" onClick={() => setScreen("home")}>
-            ⬅ Back
-          </button>
+          <button className="back-btn" onClick={() => setScreen("home")}>⬅ Back</button>
+
+          <div className="lead-summary-box">
+            <h2>Total Tasks</h2>
+            <p className="task-count">{tasks.length}</p>
+          </div>
 
           <List status={visibleStatus} />
 
@@ -127,24 +107,21 @@ function App() {
             className="input-box"
           />
 
-          <button onClick={updateTask} className="primary-btn">
-            Update Task
-          </button>
+          <button onClick={updateTask} className="primary-btn">Update Task</button>
 
-          <button
-            onClick={() => setShowBreak(s => !s)}
-            className="primary-btn"
-          >
+          <button onClick={() => setShowBreak(s => !s)} className="primary-btn">
             {showBreak ? "Show All" : "Show Break"}
           </button>
 
-          <button onClick={resetLead} className="reset-btn">
-            Reset Lead View
-          </button>
+          <button onClick={resetLead} className="reset-btn">Reset Lead View</button>
         </div>
       )}
     </div>
   );
 }
 
-export default App;
+function setMemberStatusLocal(statusValue, memberId) {
+  return (dispatch) => {
+    dispatch({ type: "members/setMemberStatus", payload: { id: memberId, status: statusValue } });
+  };
+}

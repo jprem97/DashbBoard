@@ -1,18 +1,16 @@
 import React from "react";
 import "./List.css";
 
-function List({ status }) {
+export default function List({ status }) {
   return (
     <div className="list-container">
-      {status.map((j) => (
-        <div key={j.id} className="list-card">
-          <div className="list-row"><span>ID:</span> {j.id}</div>
-          <div className="list-row"><span>Status:</span> {j.status}</div>
-          <div className="list-row"><span>Task:</span> {j.task}</div>
+      {status.map(j => (
+        <div className="list-item" key={j.id}>
+          <div>ID: {j.id}</div>
+          <div>Status: {j.status}</div>
+          <div>Task: {j.task}</div>
         </div>
       ))}
     </div>
   );
 }
-
-export default List;

@@ -1,38 +1,27 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { updateTaskProgress } from "../features/tasksSlice";
+import { setMemberStatus } from "../features/statusSlice";
 import "./TeamMember.css";
 
-function TeamMember({
+export default function TeamMember({
   memberId,
   globalStatus,
   setGlobalStatus,
   tasks,
-  setTasks,
-  status,
-  setStatus
+  status
 }) {
+  const dispatch = useDispatch();
+
   const statuses = ["Working", "Break", "Meeting", "Offline"];
 
   const changeStatus = (newStatus) => {
     setGlobalStatus(newStatus);
-    setStatus(
-      status.map((item) =>
-        item.id === memberId ? { ...item, status: newStatus.toLowerCase() } : item
-      )
-    );
+    dispatch(setMemberStatus({ id: memberId, status: newStatus.toLowerCase() }));
   };
 
-  const updateTaskProgress = (taskId, delta) => {
-    setTasks(
-      tasks.map((t) =>
-        t.id === taskId
-          ? {
-              ...t,
-              progress: Math.min(100, Math.max(0, t.progress + delta)),
-              completed: t.progress + delta >= 100
-            }
-          : t
-      )
-    );
+  const updateProgress = (taskId, delta) => {
+    dispatch(updateTaskProgress({ id: taskId, delta }));
   };
 
   const getTaskState = (p) => {
@@ -53,6 +42,7 @@ function TeamMember({
 
       <div className="tm-status-box">
         <h3>Update Your Status</h3>
+
         <div className="tm-status-buttons">
           {statuses.map((s) => (
             <button
@@ -77,7 +67,10 @@ function TeamMember({
             </div>
 
             <div className="tm-task-meter">
-              <span className="tm-meter-text">{getTaskState(t.progress)}</span>
+              <div className="tm-task-meter-top">
+                <span className="tm-state">{getTaskState(t.progress)}</span>
+                <span className="tm-percent">{t.progress}%</span>
+              </div>
 
               <div className="tm-meter-bar">
                 <div
@@ -88,15 +81,13 @@ function TeamMember({
                   }}
                 />
               </div>
-
-              <span className="tm-meter-percent">{t.progress}%</span>
             </div>
 
             <div className="tm-controls">
-              <button onClick={() => updateTaskProgress(t.id, -10)} disabled={t.progress === 0}>
+              <button onClick={() => updateProgress(t.id, -10)} disabled={t.progress === 0}>
                 -
               </button>
-              <button onClick={() => updateTaskProgress(t.id, 10)} disabled={t.progress === 100}>
+              <button onClick={() => updateProgress(t.id, 10)} disabled={t.progress === 100}>
                 +
               </button>
             </div>
@@ -106,5 +97,3 @@ function TeamMember({
     </div>
   );
 }
-
-export default TeamMember;
